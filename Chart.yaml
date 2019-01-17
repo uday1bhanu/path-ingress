@@ -1,0 +1,9 @@
+name: path-ingress
+apiVersion: v1
+home: https://github.com/uday1bhanu/path-ingress
+sources:
+  - https://github.com/uday1bhanu/path-ingress
+description: A Helm chart for path based ingress
+version: 0.1.0
+maintainers:
+  - name: Uday
