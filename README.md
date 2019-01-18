@@ -82,8 +82,8 @@ helm install --name=path-ingress --version=0.1.13 --debug --tiller-namespace=dev
 ```
 
 # References
-https://github.com/helm/chartmuseum
-https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines
-https://yaml.org/spec/1.2/spec.html#id2793979
-https://github.com/helm/helm/issues/3470#issue-295302188
-https://github.com/helm/helm/issues/3130#issuecomment-407866634
+* https://github.com/helm/chartmuseum
+* https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines
+* https://yaml.org/spec/1.2/spec.html#id2793979
+* https://github.com/helm/helm/issues/3470#issue-295302188
+* https://github.com/helm/helm/issues/3130#issuecomment-407866634
