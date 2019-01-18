@@ -1,42 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- annotations:
-   kubernetes.io/ingress.class: nginx
-   nginx.ingress.kubernetes.io/ssl-redirect: "true"
-   nginx.ingress.kubernetes.io/rewrite-target: /
- name: path-ingress-1
+ name: path-ingress
 spec:
   tls:
     - hosts:
-   ##< if eq .Release.Namespace "dev" >##
+   {{ if eq .Release.Namespace "dev" }}
       - dev.uday.com
-   ##< else if eq .Release.Namespace "dev1" >##
-      - dev1.app-arcusdev.anaplan.com
-   ##< else if eq .Release.Namespace "qa" >##
-      - qa.uday.com
-   ##< else if eq .Release.Namespace "staging" >##
-      - staging.uday.com
-   ##< else if eq .Release.Namespace "prod" >##
-      - aws-prod.uday.com
-   ##< else >##
-      - gcp-prod.uday.com
-   ##< end >##
-      # This assumes tls-secret exists and the SSL
-      # certificate contains a CN for foo.bar.com
+   {{ end }}
       secretName: uday-com-secret
   rules:
-##< if eq .Release.Namespace "dev" >##
-  - dev.uday.com
-##< else if eq .Release.Namespace "dev1" >##
-  - dev1.app-arcusdev.anaplan.com
-##< else if eq .Release.Namespace "qa" >##
-  - qa.uday.com
-##< else if eq .Release.Namespace "staging" >##
-  - staging.uday.com
-##< else if eq .Release.Namespace "prod" >##
-  - aws-prod.uday.com
-##< else >##
-  - gcp-prod.uday.com
+{{ if eq .Release.Namespace "dev" }}
+  - host: dev.uday.com
+{{ end }}
     http:
-      {{.Values.pathsmap}}
+      {{- if .Values.pathsmap }}
+      {{ .Values.pathsmap | toYaml | trimPrefix "|-\n" | nindent 4}}
+      {{- end }}
